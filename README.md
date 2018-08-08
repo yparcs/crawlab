@@ -1,7 +1,7 @@
 crawlab
 ===============================
 
-An interactive toolkit for Scrapy
+An interactive toolkit for web crawler
 
 Installation
 ------------
