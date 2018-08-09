@@ -147,7 +147,7 @@ setup_args = {
         'validators>=0.12.0',
         'wget>=3.2',
         'beautifulsoup4',
-        'fabric<2.0'
+        'fabric'
     ],
     'packages': find_packages(),
     'zip_safe': False,
