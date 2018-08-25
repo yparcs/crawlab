@@ -1,7 +1,7 @@
 crawlab
 ===============================
 
-An interactive toolkit for web crawler
+An experimental toolkit for web crawler
 
 Installation
 ------------
