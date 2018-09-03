@@ -13,7 +13,7 @@ class Crawler:
         return self.proxy.get_url()
 
     def get_handler(self, key):
-        return self.log_handlers[key]
+        return self.log_handlers.get(key, create_handler())
 
     def get_messages(self, url):
         return self.proxy.get_messages(url)
