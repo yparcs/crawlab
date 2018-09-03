@@ -1,7 +1,7 @@
 crawlab
 ===============================
 
-An interactive toolkit for web crawler
+An experimental toolkit for web crawler
 
 Installation
 ------------
@@ -12,7 +12,13 @@ To install use pip:
     $ jupyter nbextension enable --py --sys-prefix crawlab
 
 
-For a development installation (requires npm),
+For a development installation,
+Ubuntu dependencies:
+
+    $ sudo apt-get install python3 python3-dev
+    $ sudo apt-get install npm
+    
+Install extension:
 
     $ git clone https://github.com/fabiocariati/crawlab.git
     $ cd crawlab
