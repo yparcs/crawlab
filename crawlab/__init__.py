@@ -4,6 +4,7 @@ from crawlab.magic_crawler import MagicCrawler
 from scrapy.http.response.html import HtmlResponse
 from scrapy.http.response.text import TextResponse
 from scrapy.http.response.xml import XmlResponse
+from scrapy.http.response import Response
 from scrapy.selector.unified import SelectorList
 from scrapy.item import Item
 from crawlab.utils import OutputWidgetHandler
@@ -27,8 +28,10 @@ def _jupyter_nbextension_paths():
 def configure_display():
     for resp_class in [HtmlResponse, TextResponse, XmlResponse]:
         resp_class._ipython_display_ = \
-            lambda r: display(ResponseWidget(r, crawler.get_messages(r.url), crawler.get_handler(r.url)))
+            lambda r: display(HTMLResponseWidget(r, crawler.get_messages(r.url), crawler.get_handler(r.url)))
 
+    Response._ipython_display_ = \
+        lambda r: display(ResponseWidget(r, crawler.get_messages(r.url), crawler.get_handler(r.url)))
     SelectorList._ipython_display_ = lambda s: display(SelectorWidget(s))
     Item._ipython_display_ = lambda i: display(JsonWidget(i))
 

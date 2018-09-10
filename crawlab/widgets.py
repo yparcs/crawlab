@@ -5,6 +5,7 @@ import ipywidgets
 from ipywidgets import Layout, HTML
 from traitlets import Unicode, Dict
 from bs4 import BeautifulSoup
+import base64
 
 from crawlab.utils import highlight_html
 
@@ -55,11 +56,29 @@ class BrowserWidget(ipywidgets.DOMWidget):
 
 
 @ipywidgets.register
-class ResponseWidget(ipywidgets.Tab):
+class HTMLResponseWidget(ipywidgets.Tab):
     def __init__(self, response, messages, log_handler):
         children = [
             ('Browser', BrowserWidget(srcdoc=html.escape(response.text))),
             ('Code', ipywidgets.HTML(highlight_html(response.text))),
+            ('Logs', log_handler.out),
+            ('Network', NetworkWidget(messages=messages))
+        ]
+
+        super(HTMLResponseWidget, self).__init__([widget for name, widget in children], layout={'height': '300px'})
+
+        for i, widget in enumerate(children):
+            self.set_title(i, widget[0])
+
+
+@ipywidgets.register
+class ResponseWidget(ipywidgets.Tab):
+    def __init__(self, response, messages, log_handler):
+        content_type = response.headers['Content-Type'].decode().split(';')[0]
+        url = 'data:' + content_type + ';base64,' + base64.b64encode(response.body).decode()
+        html_str = '<iframe src="{url}" width="100%", height="280px"></iframe>'.format(url=url)
+        children = [
+            ('Browser', ipywidgets.HTML(html_str)),
             ('Logs', log_handler.out),
             ('Network', NetworkWidget(messages=messages))
         ]
