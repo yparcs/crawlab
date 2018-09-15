@@ -10,6 +10,11 @@ To install use pip:
 
     $ pip install crawlab
     $ jupyter nbextension enable --py --sys-prefix crawlab
+    
+Jupyter lab:
+
+    $ jupyter labextension install @jupyter-widgets/jupyterlab-manager
+    $ jupyter labextension install js
 
 
 For a development installation,
